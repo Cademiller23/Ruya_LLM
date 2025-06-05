@@ -1,0 +1,1 @@
+// Use the memory class to interact with memoai's api

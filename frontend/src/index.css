@@ -9,6 +9,7 @@
 :root {
   /* Default theme */
   --theme-loader: #ffffff;
+   --theme-chat-input-text: #27282a;
   --theme-bg-primary: #0e0f0f;
   --theme-bg-secondary: #1b1b1e;
   --theme-bg-sidebar: #0e0f0f;
@@ -34,7 +35,7 @@
   --theme-sidebar-footer-icon-fill: #ffffff;
   --theme-sidebar-footer-icon-hover: rgba(255, 255, 255, 0.2);
 
-  --theme-chat-input-border: #525355;
+  --theme-chat-input-border: #9B5DE5;
   --theme-action-menu-bg: #27282a;
   --theme-action-menu-item-hover: rgba(255, 255, 255, 0.1);
   --theme-settings-input-bg: #0e0f0f;
@@ -99,15 +100,15 @@
 [data-theme="light"] {
   --theme-loader: #000000;
   --theme-bg-primary: #ffffff;
-  --theme-bg-secondary: #ffffff;
+  --theme-bg-secondary: #322525;
   --theme-bg-sidebar: #edf2fa;
   --theme-bg-container: #f9fbfd;
   --theme-popup-menu-bg: #c2e7fe;
 
-  --theme-bg-chat: #ffffff;
-  --theme-bg-chat-input: #eaeaea;
+  --theme-bg-chat: #1b1b1e;
+  --theme-bg-chat-input: #1b1b1e;
   --theme-text-primary: #0e0f0f;
-  --theme-text-secondary: #7a7d7e;
+  --theme-text-secondary: #ffffff;
   --theme-sidebar-item-default: #ffffff;
   --theme-sidebar-item-selected: #ffffff;
   --theme-sidebar-item-hover: #c8efff;
@@ -128,7 +129,8 @@
   --theme-sidebar-footer-icon-fill: #6e6f6f;
   --theme-sidebar-footer-icon-hover: #d8d6d6;
 
-  --theme-chat-input-border: #cccccc;
+  --theme-chat-input-text: #27282a;
+  --theme-chat-input-border: #9B5DE5;
   --theme-action-menu-bg: #eaeaea;
   --theme-action-menu-item-hover: rgba(0, 0, 0, 0.1);
   --theme-settings-input-bg: #edf2fa;
@@ -234,7 +236,6 @@ body {
     Droid Sans,
     Helvetica Neue,
     sans-serif;
-  background-color: white;
 }
 
 a {
@@ -639,8 +640,38 @@ dialog::backdrop {
     opacity: 0;
   }
 }
-
+@layer base {
+  body {
+    /* @apply bg-gradient-to-br from-ruyaPurple-500 via-ruyaPurple-200 to-ruyaTurquoise-500 text-ruyaPurple-700; */
+    min-height:100vh;
+    @apply bg-ruyaBlack text-white;
+  }
+}
 @layer components {
+  .gradient-border {
+    position: relative;
+    z-index: 0;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 0.5px;
+    border-radius: inherit;
+    background: linear-gradient(to right, 
+                                theme("colors.ruyaPurple.500"), 
+                                theme("colors.ruyaTurquoise.500"));
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box, 
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    pointer-events: none;
+    z-index: -1;
+  }
+  
   .radio-container:has(input:checked) {
     @apply border-blue-500 bg-blue-400/10 text-blue-800;
   }

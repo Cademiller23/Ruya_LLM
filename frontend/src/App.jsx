@@ -98,6 +98,7 @@ export default function App() {
           <LogoProvider>
             <PfpProvider>
               <I18nextProvider i18n={i18n}>
+                <div className="min-h-screen bg-ruyaBlack flex">
                 <Routes>
                   <Route path="/" element={<PrivateRoute Component={Main} />} />
                   <Route path="/login" element={<Login />} />
@@ -269,6 +270,7 @@ export default function App() {
                     element={<AdminRoute Component={CommunityHubImportItem} />}
                   />
                 </Routes>
+                </div>
                 <ToastContainer />
                 <KeyboardShortcutsHelp />
               </I18nextProvider>
