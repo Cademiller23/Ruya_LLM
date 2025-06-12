@@ -172,14 +172,16 @@ Mintplex Labs & the community maintain a number of deployment methods, scripts, 
 
 - `yarn setup` To fill in the required `.env` files you'll need in each of the application sections (from root of repo).
   - Go fill those out before proceeding. Ensure `server/.env.development` is filled or else things won't work right.
+- After setup, copy `server/.env` or `.env.development` with your own values so the server remembers them. Otherwise you'll see the onboarding screen on every restart.
 - Create a Python **virtual environment** (Python 3.11 is recommended) and install the memory service requirements:
   - `python3 -m venv server/python-memory/venv`
   - `source server/python-memory/venv/bin/activate`
   - `pip install -r server/python-memory/requirements.txt`
+- Use Python 3.11 or 3.10. Newer versions may fail to compile `pydantic-core`.
 - `python server/python-memory/memory_service.py` Start the memory service needed for chat history.
-- `yarn dev:server` To boot the server locally (from root of repo).
-- `yarn dev:frontend` To boot the frontend locally (from root of repo).
-- `yarn dev:collector` To then run the document collector (from root of repo).
+- `cd server && npm install && npm run dev` Start the Node.js backend.
+- `cd frontend && npm install && npm run dev` Start the frontend application.
+- `cd collector && npm install && npm run dev` Run the document collector if needed.
 
 [Learn about documents](./server/storage/documents/DOCUMENTS.md)
 
