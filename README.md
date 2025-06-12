@@ -152,6 +152,9 @@ This monorepo consists of six main sections:
 - `embed`: Submodule for generation & creation of the [web embed widget](https://github.com/Mintplex-Labs/anythingllm-embed).
 - `browser-extension`: Submodule for the [chrome browser extension](https://github.com/Mintplex-Labs/anythingllm-extension).
 
+### Rebranding
+If you wish to customize this project to use your own brand name, run `bash scripts/rebrand.sh`. This replaces all references to AnythingLLM with RuyaLLM.
+
 ## 🛳 Self-Hosting
 
 Mintplex Labs & the community maintain a number of deployment methods, scripts, and templates that you can use to run AnythingLLM locally. Refer to the table below to read how to deploy on your preferred environment or to automatically deploy.
@@ -169,6 +172,11 @@ Mintplex Labs & the community maintain a number of deployment methods, scripts, 
 
 - `yarn setup` To fill in the required `.env` files you'll need in each of the application sections (from root of repo).
   - Go fill those out before proceeding. Ensure `server/.env.development` is filled or else things won't work right.
+- Create a Python **virtual environment** (Python 3.11 is recommended) and install the memory service requirements:
+  - `python3 -m venv server/python-memory/venv`
+  - `source server/python-memory/venv/bin/activate`
+  - `pip install -r server/python-memory/requirements.txt`
+- `python server/python-memory/memory_service.py` Start the memory service needed for chat history.
 - `yarn dev:server` To boot the server locally (from root of repo).
 - `yarn dev:frontend` To boot the frontend locally (from root of repo).
 - `yarn dev:collector` To then run the document collector (from root of repo).
