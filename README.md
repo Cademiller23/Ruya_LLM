@@ -152,6 +152,9 @@ This monorepo consists of six main sections:
 - `embed`: Submodule for generation & creation of the [web embed widget](https://github.com/Mintplex-Labs/anythingllm-embed).
 - `browser-extension`: Submodule for the [chrome browser extension](https://github.com/Mintplex-Labs/anythingllm-extension).
 
+### Rebranding
+If you wish to customize this project to use your own brand name, run `bash scripts/rebrand.sh`. This replaces all references to AnythingLLM with RuyaLLM.
+
 ## 🛳 Self-Hosting
 
 Mintplex Labs & the community maintain a number of deployment methods, scripts, and templates that you can use to run AnythingLLM locally. Refer to the table below to read how to deploy on your preferred environment or to automatically deploy.
