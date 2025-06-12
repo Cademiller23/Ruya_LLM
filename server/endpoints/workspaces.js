@@ -19,6 +19,7 @@ const {
   flexUserRoleValid,
   ROLES,
 } = require("../utils/middleware/multiUserProtected");
+const memoryIntegration = require('../utils/memory/memoryIntegration');
 const { EventLogs } = require("../models/eventLogs");
 const {
   WorkspaceSuggestedMessages,
@@ -1037,6 +1038,86 @@ function workspaceEndpoints(app) {
       }
     }
   );
+
+  // Search memories endpoint
+  app.post('/workspace/:slug/memory/search', async (req, res) => {
+    try {
+      const { slug } = req.params;
+      const { query, searchType = 'hybrid', limit = 10 } = req.body;
+      const user = await userFromSession(req, res);
+      const workspace = await Workspace.get({ slug });
+      
+      if (!workspace) {
+        return res.status(404).json({ error: 'Workspace not found' });
+      }
+      
+      const userId = user?.id || `anon_${workspace.id}`;
+      
+      const results = await memoryIntegration.searchMemories(userId, query, {
+        searchType,
+        limit,
+        workspaceId: workspace.id
+      });
+      
+      res.json(results);
+    } catch (error) {
+      console.error('Memory search error:', error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Get user memories endpoint
+  app.get('/workspace/:slug/memory', async (req, res) => {
+    try {
+      const { slug } = req.params;
+      const user = await userFromSession(req, res);
+      const workspace = await Workspace.get({ slug });
+      
+      if (!workspace) {
+        return res.status(404).json({ error: 'Workspace not found' });
+      }
+      
+      const userId = user?.id || `anon_${workspace.id}`;
+      
+      const memories = await memoryIntegration.getUserMemories(
+        userId,
+        workspace.id
+      );
+      
+      res.json(memories);
+    } catch (error) {
+      console.error('Get memories error:', error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Add memory endpoint
+  app.post('/workspace/:slug/memory', async (req, res) => {
+    try {
+      const { slug } = req.params;
+      const { content, metadata = {} } = req.body;
+      const user = await userFromSession(req, res);
+      const workspace = await Workspace.get({ slug });
+      
+      if (!workspace) {
+        return res.status(404).json({ error: 'Workspace not found' });
+      }
+      
+      const userId = user?.id || `anon_${workspace.id}`;
+      
+      const result = await memoryIntegration.addMemory(
+        userId,
+        content,
+        metadata,
+        workspace.id
+      );
+      
+      res.json(result);
+    } catch (error) {
+      console.error('Add memory error:', error);
+      res.status(500).json({ error: error.message });
+    }
+  });
 }
 
 module.exports = { workspaceEndpoints };

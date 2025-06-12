@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import { Warning } from "@phosphor-icons/react";
 import UserIcon from "../../../../UserIcon";
+import ruya_circle from "../../../../UserIcon/Ruya_Circle.png"
 import Actions from "./Actions";
 import renderMarkdown from "@/utils/chat/markdown";
 import { userFromStorage } from "@/utils/request";
@@ -10,6 +11,7 @@ import DOMPurify from "@/utils/chat/purify";
 import { EditMessageForm, useEditMessage } from "./Actions/EditMessage";
 import { useWatchDeleteMessage } from "./Actions/DeleteMessage";
 import TTSMessage from "./Actions/TTSButton";
+import ruya_triangle from "../../../../UserIcon/workspace.svg";
 import {
   THOUGHT_REGEX_CLOSE,
   THOUGHT_REGEX_COMPLETE,
@@ -135,25 +137,55 @@ const HistoricalMessage = ({
 };
 
 function ProfileImage({ role, workspace }) {
-  if (role === "assistant" && workspace.pfpUrl) {
+  if (role === "assistant") {
     return (
-      <div className="relative w-[35px] h-[35px] rounded-full flex-shrink-0 overflow-hidden">
+      <div className="relative w-[35px] h-[35px] flex-shrink-0"
+    //   style={{
+    //     top: "50%",
+    //     left: "50%",
+    //     transform: "translate(-50%, -50%)",
+    //     width: "50%",
+    //     height: "50%",
+    // }}
+    >
+       <div className="relative w-full h-full"></div>
+       <div className="absolute inset-0 flex items-center justify-center">
         <img
-          src={workspace.pfpUrl}
-          alt="Workspace profile picture"
-          className="absolute top-0 left-0 w-full h-full object-cover rounded-full bg-white"
+          src={workspace.pfpUrl || ruya_triangle}
+          alt="Workspace"
+          className="w-[20px] h-[20px] object-contain"
         />
+        </div>
+        <div className="absolute flex items-center justify-center pointer-events-none z-10"
+        style={{
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "250%",
+          height: "250%",
+        }}>
+        
+       <img
+        
+          src={ruya_circle}
+          alt="Circle frame"
+          className="w-full h-full object-contain"
+        />
+        </div>
       </div>
     );
   }
 
   return (
+  
     <UserIcon
+   
       user={{
         uid: role === "user" ? userFromStorage()?.username : workspace.slug,
       }}
       role={role}
     />
+    
   );
 }
 

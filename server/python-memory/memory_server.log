@@ -1,0 +1,28 @@
+2025-06-12 13:01:29,136 - __main__ - INFO - Starting memory server on 0.0.0.0:5001
+INFO:     Started server process [65402]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:5001 (Press CTRL+C to quit)
+INFO:     127.0.0.1:50244 - "GET /health HTTP/1.1" 200 OK
+2025-06-12 13:06:30,823 - httpx - INFO - HTTP Request: POST https://api.cohere.ai/v1/embed "HTTP/1.1 200 OK"
+INFO:     127.0.0.1:50348 - "POST /context HTTP/1.1" 200 OK
+2025-06-12 13:06:36,937 - httpx - INFO - HTTP Request: POST https://api.cohere.ai/v1/embed "HTTP/1.1 200 OK"
+2025-06-12 13:06:36,947 - __main__ - INFO - Memory stored successfully with ID: 1
+INFO:     127.0.0.1:50357 - "POST /memory HTTP/1.1" 200 OK
+2025-06-12 13:06:47,364 - httpx - INFO - HTTP Request: POST https://api.cohere.ai/v1/embed "HTTP/1.1 200 OK"
+INFO:     127.0.0.1:50387 - "POST /context HTTP/1.1" 200 OK
+2025-06-12 13:06:49,030 - httpx - INFO - HTTP Request: POST https://api.cohere.ai/v1/embed "HTTP/1.1 200 OK"
+2025-06-12 13:06:49,041 - __main__ - INFO - Memory stored successfully with ID: 2
+INFO:     127.0.0.1:50387 - "POST /memory HTTP/1.1" 200 OK
+2025-06-12 13:07:52,464 - httpx - INFO - HTTP Request: POST https://api.cohere.ai/v1/embed "HTTP/1.1 200 OK"
+/Users/cademiller/Desktop/Ruya/anything-llm/server/python-memory/memory_server.py:128: RuntimeWarning: invalid value encountered in cast
+  similarity = np.dot(message_embedding, stored_embedding) / (
+2025-06-12 13:07:52,479 - __main__ - ERROR - Error in get_chat_context: shapes (1024,) and (2048,) not aligned: 1024 (dim 0) != 2048 (dim 0)
+INFO:     127.0.0.1:50454 - "POST /context HTTP/1.1" 500 Internal Server Error
+2025-06-12 13:07:55,212 - httpx - INFO - HTTP Request: POST https://api.cohere.ai/v1/embed "HTTP/1.1 200 OK"
+2025-06-12 13:07:55,224 - __main__ - INFO - Memory stored successfully with ID: 3
+INFO:     127.0.0.1:50454 - "POST /memory HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [65402]

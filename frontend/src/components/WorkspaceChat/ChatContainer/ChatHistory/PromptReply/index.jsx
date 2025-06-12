@@ -3,6 +3,9 @@ import { Warning } from "@phosphor-icons/react";
 import UserIcon from "../../../../UserIcon";
 import renderMarkdown from "@/utils/chat/markdown";
 import Citations from "../Citation";
+import ruya_circle from "../../../../UserIcon/Ruya_Circle.png"
+import ruya_triangle from "../../../../UserIcon/workspace.svg";
+
 import {
   THOUGHT_REGEX_CLOSE,
   THOUGHT_REGEX_COMPLETE,
@@ -79,20 +82,47 @@ const PromptReply = ({
 };
 
 export function WorkspaceProfileImage({ workspace }) {
-  if (!!workspace.pfpUrl) {
+  // if (!!workspace.pfpUrl) {
     return (
-      <div className="relative w-[35px] h-[35px] rounded-full flex-shrink-0 overflow-hidden">
-        <img
-          src={workspace.pfpUrl}
-          alt="Workspace profile picture"
-          className="absolute top-0 left-0 w-full h-full object-cover rounded-full bg-white"
-        />
-      </div>
+      <div className="relative w-[35px] h-[35px] flex-shrink-0"
+          //   style={{
+          //     top: "50%",
+          //     left: "50%",
+          //     transform: "translate(-50%, -50%)",
+          //     width: "50%",
+          //     height: "50%",
+          // }}
+          >
+             <div className="relative w-full h-full"></div>
+             <div className="absolute inset-0 flex items-center justify-center">
+              <img
+                src={workspace.pfpUrl || ruya_triangle}
+                alt="Workspace"
+                className="w-[20px] h-[20px] object-contain"
+              />
+              </div>
+              <div className="absolute flex items-center justify-center pointer-events-none z-10"
+              style={{
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: "250%",
+                height: "250%",
+              }}>
+              
+             <img
+              
+                src={ruya_circle}
+                alt="Circle frame"
+                className="w-full h-full object-contain"
+              />
+              </div>
+            </div>
     );
   }
 
-  return <UserIcon user={{ uid: workspace.slug }} role="assistant" />;
-}
+//   return <UserIcon user={{ uid: workspace.slug }} role="assistant" />;
+// }
 
 function RenderAssistantChatContent({ message }) {
   const contentRef = useRef("");

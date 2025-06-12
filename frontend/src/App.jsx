@@ -90,6 +90,13 @@ const SystemPromptVariables = lazy(
   () => import("@/pages/Admin/SystemPromptVariables")
 );
 
+// Commenting out the redirect logic that's causing issues
+// useEffect(() => {
+//   if (window.location.pathname === "/" || window.location.pathname === "/onboarding") {
+//     window.location.href = "/workspace/default";
+//   }
+// }, []);
+
 export default function App() {
   return (
     <ThemeProvider>

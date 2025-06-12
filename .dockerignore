@@ -9,10 +9,5 @@
 **/dist/
 **/v-env/
 **/__pycache__/
-**/.env
-**/.env.*
 **/bundleinspector.html
 **/tmp/**
-**/.log
-!docker/.env.example
-!frontend/.env.production
