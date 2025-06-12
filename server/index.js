@@ -87,7 +87,8 @@ if (process.env.NODE_ENV !== "development") {
     })
   );
 
-  app.use("/", function (_, response) {
+  app.get('*', function (request, response, next) {
+    if (request.originalUrl.startsWith('/api')) return next();
     IndexPage.generate(response);
     return;
   });

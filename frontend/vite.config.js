@@ -4,6 +4,7 @@ import postcss from "./postcss.config.js"
 import react from "@vitejs/plugin-react"
 import dns from "dns"
 import { visualizer } from "rollup-plugin-visualizer"
+import history from 'connect-history-api-fallback'
 
 dns.setDefaultResultOrder("verbatim")
 
@@ -26,8 +27,26 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       }
-    }
   },
+  middleware: 'html',
+  setupMiddlewares(middlewares) {
+    middlewares.unshift(
+      history({
+        disableDotRule: true,
+        verbose: true,
+        htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'],
+        rewrites: [
+          {
+            from: /^\/api\/.*$/,
+            to: (context) => context.parsedUrl.pathname
+          }
+        ]
+      })
+    );
+    return middlewares;
+  }
+},
+
   define: {
     "process.env": process.env
   },

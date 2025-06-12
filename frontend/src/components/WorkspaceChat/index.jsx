@@ -5,6 +5,7 @@ import ChatContainer from "./ChatContainer";
 import paths from "@/utils/paths";
 import ModalWrapper from "../ModalWrapper";
 import { useParams } from "react-router-dom";
+
 import { DnDFileUploaderProvider } from "./ChatContainer/DnDWrapper";
 import { WarningCircle } from "@phosphor-icons/react";
 import {
@@ -13,11 +14,15 @@ import {
 } from "../contexts/TTSProvider";
 
 export default function WorkspaceChat({ loading, workspace }) {
+  const {slug} = useParams();
   useWatchForAutoPlayAssistantTTSResponse();
   const { threadSlug = null } = useParams();
   const [history, setHistory] = useState([]);
   const [loadingHistory, setLoadingHistory] = useState(true);
-
+  useEffect(() => {
+    console.log("Mounted WorkspaceChat with slug:", slug);
+  }, []);
+  
   useEffect(() => {
     async function getHistory() {
       if (loading) return;
